@@ -1,5 +1,7 @@
 <?php
 
+namespace vendor\core;
+
 class Router{
 
     /**
@@ -54,6 +56,8 @@ class Router{
                 if (empty($route['action'])){
                     $route['action'] = 'index';
                 }
+                $route['controller'] = self::upperCamelCase($route['controller']);
+                $route['action'] = self::lowerCamelCase($route['action']);
                 self::$route = $route;
                 return true;
             }
@@ -86,11 +90,13 @@ class Router{
      * @param $url
      */
     public static function dispatch($url){
+        $url = self::removeQueryString($url);
+        debug($url);
         if (Router::matchRoute($url)){
-            $controller = self::upperCamelCase(self::$route['controller']);
+            $controller = 'app\controllers\\' . self::$route['controller'];
             if (class_exists($controller)) {
-                $objController = new $controller;
-                $method = self::lowerCamelCase(self::$route['action']) . 'Action';
+                $objController = new $controller(self::$route);
+                $method = self::$route['action'] . 'Action';
                 if (method_exists($objController,$method)){
                     $objController->$method();
                 } else {
@@ -105,5 +111,16 @@ class Router{
         }
     }
 
+    public static function removeQueryString($url){
+        if ($url){
+            $params = explode('&',$url,2);
+            debug($params);
+            if (false === strpos($params[0],'=')){
+                return $params[0];
+            }else {
+                return '';
+            }
+        }
+    }
 
 }
