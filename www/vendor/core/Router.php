@@ -2,22 +2,47 @@
 
 class Router{
 
+    /**
+     * массив всех правил
+     * @var array
+     */
     protected static $routes = [];
+
+    /**
+     * Текущее правило
+     * @var array
+     */
     protected static $route = [];
 
-    public static function add($regexp,$route = []){
+    /**
+     * Добавляет правила маршрутизации
+     * @param $regexp
+     * @param array $route
+     */
+    public static function add($regexp, $route = []){
         self::$routes[$regexp] = $route;
     }
 
+    /**
+     * @return array
+     */
     public static function getRoutes(){
         return self::$routes;
     }
 
 
+    /**
+     * @return array
+     */
     public static function getRoute(){
         return self::$route;
     }
 
+    /**
+     * Проверка совпадения правила роутинга по URL
+     * @param $url
+     * @return bool
+     */
     public static function matchRoute($url){
         foreach (self::$routes as $pattern=>$route){
             if (preg_match_all("#$pattern#i",$url,$matches))  {
@@ -36,18 +61,30 @@ class Router{
         return false;
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     */
     protected static function upperCamelCase($name){
 
         return str_replace(' ','',ucwords(str_replace('-',' ',$name)));
 
     }
 
+    /**
+     * @param $name
+     * @return string
+     */
     protected static function lowerCamelCase($name){
 
         return lcfirst(self::upperCamelCase($name));
 
     }
 
+    /**
+     * Функция перенаправляет входящий URL по правилам
+     * @param $url
+     */
     public static function dispatch($url){
         if (Router::matchRoute($url)){
             $controller = self::upperCamelCase(self::$route['controller']);
