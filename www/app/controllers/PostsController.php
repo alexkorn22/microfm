@@ -11,6 +11,9 @@ class PostsController extends AppController {
 
     public function testAction() {
 
+        $name = 'Name value';
+        $this->setVars(compact('name'));
+
     }
 
 }

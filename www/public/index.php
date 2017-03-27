@@ -23,8 +23,6 @@ spl_autoload_register(function ($class) {
 });
 
 $query = rtrim($_SERVER['QUERY_STRING'], '/');
-$query = ltrim($query, 'index.php');
-$query = ltrim($query, '&');
 
 //routers
 Router::add('^page/?(?P<alias>[a-z-]+)?$',['controller'=>'Page','action'=>'view']);
