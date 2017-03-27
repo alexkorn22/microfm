@@ -91,9 +91,8 @@ class Router{
      */
     public static function dispatch($url){
         $url = self::removeQueryString($url);
-        debug($url);
         if (Router::matchRoute($url)){
-            $controller = 'app\controllers\\' . self::$route['controller'];
+            $controller = 'app\controllers\\' . self::$route['controller'] . 'Controller';
             if (class_exists($controller)) {
                 $objController = new $controller(self::$route);
                 $method = self::$route['action'] . 'Action';
@@ -114,7 +113,6 @@ class Router{
     public static function removeQueryString($url){
         if ($url){
             $params = explode('&',$url,2);
-            debug($params);
             if (false === strpos($params[0],'=')){
                 return $params[0];
             }else {
