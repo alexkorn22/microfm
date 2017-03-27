@@ -5,6 +5,7 @@ define('WWW', __DIR__);
 define('CORE', dirname(__DIR__) . '/vendor/core');
 define('ROOT', dirname(__DIR__));
 define('APP', dirname(__DIR__) . '/app');
+define('LAYOUT', 'default');
 
 
 error_reporting(-1);

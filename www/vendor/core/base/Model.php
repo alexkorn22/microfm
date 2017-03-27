@@ -2,8 +2,6 @@
 
 namespace vendor\core\base;
 
-class Model{
-
-
+abstract class Model{
 
 }

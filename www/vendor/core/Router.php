@@ -98,6 +98,7 @@ class Router{
                 $method = self::$route['action'] . 'Action';
                 if (method_exists($objController,$method)){
                     $objController->$method();
+                    $objController->getView();
                 } else {
                     echo "Метод $controller::$method не найден";
                 }
