@@ -8,7 +8,7 @@
 
 namespace vendor\core\base;
 
-abstract class Controller{
+class Controller{
 
     /**
      * текущий маршрут

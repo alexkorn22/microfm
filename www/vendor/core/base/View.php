@@ -39,6 +39,7 @@ class View {
         if (is_array($vars)) {
             extract($vars);
         }
+
         $fileView =  APP . "/views/{$this->route['controller']}/{$this->view}.php";
         ob_start();
         if (is_file($fileView)){
@@ -46,6 +47,7 @@ class View {
         } else {
             echo "<p>Не найден вид <b>$fileView</b></p>";
         }
+        /** @noinspection PhpUnusedLocalVariableInspection */
         $content = ob_get_clean();
         if ($this->layout !== false){
             $fileLayout = APP . "/views/layouts/{$this->layout}.php";

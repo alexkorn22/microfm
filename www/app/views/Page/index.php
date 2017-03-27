@@ -1,1 +1,0 @@
-<h1>PAGE INDEX</h1>
