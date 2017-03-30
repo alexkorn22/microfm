@@ -25,7 +25,7 @@ class Model{
      */
     public function findAll() {
 
-        $sql = "SELECT * FROM {$this->table}";
+         $sql = "SELECT * FROM {$this->table}";
         //return $this->connectDb->query($sql);
     }
 
