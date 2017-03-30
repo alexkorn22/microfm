@@ -8,7 +8,8 @@ class MainController extends AppController{
 
     public function indexAction() {
         $model = new Main();
-        $posts = $model->findAll();
+        $posts = \R::findAll('posts');
+        //$posts = $model->findAll();
         $this->setVars(compact('posts'));
     }
 

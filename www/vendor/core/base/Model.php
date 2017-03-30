@@ -16,7 +16,7 @@ class Model{
 
     public function execute($sql) {
 
-        return $this->connectDb->execute($sql);
+        //return $this->connectDb->execute($sql);
 
     }
 
@@ -26,7 +26,7 @@ class Model{
     public function findAll() {
 
         $sql = "SELECT * FROM {$this->table}";
-        return $this->connectDb->query($sql);
+        //return $this->connectDb->query($sql);
     }
 
 

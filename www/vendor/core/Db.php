@@ -2,6 +2,7 @@
 
 namespace vendor\core;
 
+
 class Db{
 
     private static $instance;
@@ -14,6 +15,7 @@ class Db{
     protected function __construct(){
 
         $config = require ROOT . '/config/db.php';
+        /*
         $opt = [
             \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
             \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
@@ -24,6 +26,9 @@ class Db{
         } catch (\PDOException $e) {
             die('Подключение не удалось: ' . $e->getMessage());
         }
+        */
+        require LIBS . '/redbean.php';
+        \R::setup($config['dsn'], $config['user'], $config['pass']);
 
     }
 
@@ -36,7 +41,7 @@ class Db{
         }
         return self::$instance;
     }
-
+    /*
     public function execute($sql){
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute();
@@ -53,4 +58,5 @@ class Db{
         }
 
     }
+    */
 }
