@@ -16,4 +16,5 @@ function debug($value,$die = false) {
     if ($die) {
         die();
     }
+
 }
