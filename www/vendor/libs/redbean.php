@@ -3,6 +3,7 @@
 namespace RedBeanPHP {
 
 /**
+ *
  * RedBean Logging interface.
  * Provides a uniform and convenient logging
  * interface throughout RedBeanPHP.
