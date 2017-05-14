@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Main;
+use vendor\core\App;
 use vendor\core\Registry;
 
 class MainController extends AppController{
