@@ -7,7 +7,7 @@ define('ROOT', dirname(__DIR__));
 define('APP', dirname(__DIR__) . '/app');
 define('LAYOUT', 'default');
 define('LIBS', dirname(__DIR__) . '/vendor/libs');
-define('PDTMasterPath', dirname(__DIR__) . '/vendor/libs/PDTmaster/index.php');
+define('CACHE', dirname(__DIR__) . '/tmp/cache');
 
 error_reporting(-1);
 

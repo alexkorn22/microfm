@@ -9,7 +9,11 @@ use vendor\core\Registry;
 class MainController extends AppController{
 
     public function indexAction() {
-        $posts = \R::findAll('posts');
+        $posts = App::$app->cache->get('posts');
+        if (false === $posts) {
+            $posts = \R::findAll('posts');
+            App::$app->cache->set('posts', $posts);
+        }
         $this->setVars(compact('posts'));
     }
 }

@@ -2,6 +2,11 @@
 
 namespace vendor\core;
 
+
+/**
+ * Class Registry
+ * @package vendor\core
+ */
 class Registry{
 
     private static $instance;
@@ -28,7 +33,7 @@ class Registry{
     }
     public function __get($name){
         if (is_object(self::$objects[$name])) {
-            return self::$objects;
+            return self::$objects[$name];
         }
     }
 
