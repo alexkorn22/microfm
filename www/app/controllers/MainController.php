@@ -16,4 +16,8 @@ class MainController extends AppController{
         }
         $this->setVars(compact('posts'));
     }
+
+    public function testAction() {
+
+    }
 }
