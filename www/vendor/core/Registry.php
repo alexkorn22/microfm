@@ -2,7 +2,6 @@
 
 namespace vendor\core;
 
-
 /**
  * Class Registry
  * @package vendor\core
