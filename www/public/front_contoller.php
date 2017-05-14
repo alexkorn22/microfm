@@ -19,12 +19,3 @@ spl_autoload_register(function ($class) {
         require_once $file;
     }
 });
-
-$query = rtrim($_SERVER['QUERY_STRING'], '/');
-
-//routers
-Router::add('^page/?(?P<alias>[a-z-]+)?$',['controller'=>'Page','action'=>'view']);
-
-//default routers
-Router::add('^$', ['controller' => 'Main', 'action' => 'index']);
-Router::add('^(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?$');
