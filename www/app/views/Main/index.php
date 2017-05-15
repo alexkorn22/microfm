@@ -13,3 +13,7 @@
         </div>
     </div>
 <?endforeach;?>
+
+<script>
+    console.log('index');
+</script>
