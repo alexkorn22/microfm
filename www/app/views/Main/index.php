@@ -13,7 +13,24 @@
         </div>
     </div>
 <?endforeach;?>
+<hr>
+<div id="one_post">
+
+</div>
+
+<button id="send">Тест ajax</button>
 
 <script>
-    console.log('index');
+
+    $('#send').on('click',function () {
+        $.ajax({
+            url: '/main/testAjax',
+            method : 'POST',
+            data : {'id' : 2},
+            success : function (data) {
+                $('#one_post').html(data);
+            }
+        })
+    })
+
 </script>

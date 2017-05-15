@@ -8,6 +8,8 @@
 
 namespace vendor\core\base;
 
+use vendor\core\App;
+
 class Controller{
 
     /**
@@ -52,6 +54,15 @@ class Controller{
 
         $this->vars = $vars;
 
+    }
+
+    public function isAjax() {
+        return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+    }
+
+    public function loadView($view, $vars = []) {
+        extract($vars);
+        require APP . '/views/' . $this->route['controller'] . '/' . $view . '.php';
     }
 
 }
