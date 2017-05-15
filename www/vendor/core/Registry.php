@@ -8,7 +8,7 @@ namespace vendor\core;
  */
 class Registry{
 
-    private static $instance;
+    use TSingleton;
     private static $objects;
 
     protected function __construct(){
@@ -16,13 +16,6 @@ class Registry{
         foreach ($config['components'] as $name => $component) {
             self::$objects[$name] = new $component;
         }
-    }
-
-    public static function getInstance(){
-        if (empty(self::$instance)) {
-            self::$instance = new self();
-        }
-        return self::$instance;
     }
 
     public function __set($name, $value){
@@ -34,10 +27,6 @@ class Registry{
         if (is_object(self::$objects[$name])) {
             return self::$objects[$name];
         }
-    }
-
-    public function getObj() {
-        debug(self::$objects);
     }
 
 }
