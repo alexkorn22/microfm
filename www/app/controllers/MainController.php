@@ -28,7 +28,8 @@ class MainController extends AppController{
     }
 
     public function testAction() {
-        View::setMeta('Test', 'Описание');
+        echo 'test';
+        die();
     }
 
 }

@@ -11,7 +11,7 @@ define('CACHE', dirname(__DIR__) . '/tmp/cache');
 
 error_reporting(-1);
 
-require '../vendor/libs/functions.php';
+require LIBS .'/functions.php';
 
 spl_autoload_register(function ($class) {
     $nameClass = str_replace('\\','/',$class);
