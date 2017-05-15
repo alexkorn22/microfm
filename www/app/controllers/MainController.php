@@ -4,11 +4,13 @@ namespace app\controllers;
 
 use app\models\Main;
 use vendor\core\App;
+use vendor\core\base\View;
 use vendor\core\Registry;
 
 class MainController extends AppController{
 
     public function indexAction() {
+        View::setMeta('Главная', 'Описание');
         $posts = App::$app->cache->get('posts');
         if (false === $posts) {
             $posts = \R::findAll('posts');
@@ -23,6 +25,10 @@ class MainController extends AppController{
             $this->loadView('testAjax', compact('post'));
             die();
         }
+    }
+
+    public function testAction() {
+        View::setMeta('Test', 'Описание');
     }
 
 }
