@@ -1,10 +1,15 @@
 <?php
 
 namespace vendor\core;
+use vendor\core\base\Model;
+use vendor\libs\Cache;
 
 /**
  * Class Registry
  * @package vendor\core
+ * @property Cache $cache
+ * @property Model $model
+ * @property User $user
  */
 class Registry{
 

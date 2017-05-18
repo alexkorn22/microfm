@@ -16,6 +16,5 @@ class Db{
         $config = require ROOT . '/config/db.php';
         require LIBS . '/redbean.php';
         \R::setup($config['dsn'], $config['user'], $config['pass']);
-
     }
 }

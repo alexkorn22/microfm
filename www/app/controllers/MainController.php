@@ -6,6 +6,7 @@ use app\models\Main;
 use vendor\core\App;
 use vendor\core\base\View;
 use vendor\core\Registry;
+use vendor\core\User;
 
 class MainController extends AppController{
 
@@ -38,8 +39,8 @@ class MainController extends AppController{
             'remember' => '',
             'error' => '',
         ];
-
         if ($this->isPost()){
+
             $data = array_merge($data, $_POST);
             $data['error'] = '';
             if (empty($data['login']) || strlen($data['login']) < 3) {
@@ -47,6 +48,9 @@ class MainController extends AppController{
             }
             if (empty($data['password']) || strlen($data['password']) < 6){
                 $data['error'] .= '<br>Минимальная длина пароля 6 символа';
+            }
+            if (empty($data['error'])){
+
             }
         }
         $this->setVars(compact('data'));
