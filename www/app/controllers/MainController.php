@@ -28,8 +28,7 @@ class MainController extends AppController{
     }
 
     public function testAction() {
-        echo 'test';
-        die();
+
     }
 
 }
