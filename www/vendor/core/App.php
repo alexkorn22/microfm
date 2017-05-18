@@ -6,7 +6,6 @@ namespace vendor\core;
 /**
  * Class App
  * @package vendor\core
- * @property Registry $app;
  */
 class App{
 

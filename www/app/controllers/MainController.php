@@ -50,7 +50,11 @@ class MainController extends AppController{
                 $data['error'] .= '<br>Минимальная длина пароля 6 символа';
             }
             if (empty($data['error'])){
-
+                App::$app->user->login = $data['login'];
+                App::$app->user->password = md5($data['password']);
+                if (!App::$app->user->login()) {
+                    $data['error'] = 'Не удалось найти пользователя';
+                }
             }
         }
         $this->setVars(compact('data'));
