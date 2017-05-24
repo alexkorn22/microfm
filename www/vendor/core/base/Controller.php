@@ -40,7 +40,6 @@ class Controller{
 
         $this->route = $route;
         $this->view = $route['action'];
-        App::$app->user->checkAuth();
     }
 
     public function getView(){

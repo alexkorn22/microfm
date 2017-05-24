@@ -21,3 +21,4 @@ spl_autoload_register(function ($class) {
     }
 });
 new \vendor\core\App();
+\vendor\core\App::$app->user->checkAuth();

@@ -17,6 +17,7 @@ class MainController extends AppController{
             $posts = \R::findAll('posts');
             App::$app->cache->set('posts', $posts);
         }
+        App::$app->user->isAdmin();
         $this->setVars(compact('posts'));
     }
 
@@ -29,7 +30,9 @@ class MainController extends AppController{
     }
 
     public function testAction() {
-
+        if (!App::$app->user->isAdmin()){
+           header('Location: /');
+        }
     }
 
     public function loginAction() {

@@ -9,7 +9,7 @@ class User{
     public $id = 0;
     public $login;
     public $password;
-    public $admin = 0;
+    protected $admin = 0;
 
     public function save(){
         $rec = \R::dispense('users');
@@ -20,7 +20,11 @@ class User{
     }
 
     public function isAdmin() {
-        return $this->admin == 1;
+        if (1 == $this->admin) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function isAuth() {

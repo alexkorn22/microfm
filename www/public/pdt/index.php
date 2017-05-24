@@ -1,5 +1,10 @@
 <?php
+
 include '../front_contoller.php';
+
+if (!\vendor\core\App::$app->user->isAdmin()){
+    header('Location: /');
+}
 error_reporting(0);
 include('inc/Stock.php');
 include('inc/PseudoDaemon.class.php');
