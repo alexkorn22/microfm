@@ -35,32 +35,4 @@ class MainController extends AppController{
         }
     }
 
-    public function loginAction() {
-        $data = [
-            'login' => '',
-            'password' => '',
-            'remember' => '',
-            'error' => '',
-        ];
-        if ($this->isPost()){
-
-            $data = array_merge($data, $_POST);
-            $data['error'] = '';
-            if (empty($data['login']) || strlen($data['login']) < 3) {
-                $data['error'] .= 'Минимальная длина логина 3 символа';
-            }
-            if (empty($data['password']) || strlen($data['password']) < 6){
-                $data['error'] .= '<br>Минимальная длина пароля 6 символа';
-            }
-            if (empty($data['error'])){
-                App::$app->user->login = $data['login'];
-                App::$app->user->password = md5($data['password']);
-                if (!App::$app->user->login()) {
-                    $data['error'] = 'Не удалось найти пользователя';
-                }
-            }
-        }
-        $this->setVars(compact('data'));
-    }
-
 }

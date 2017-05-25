@@ -40,6 +40,8 @@ class Controller{
 
         $this->route = $route;
         $this->view = $route['action'];
+        View::setMeta('Главная', 'Описание');
+
     }
 
     public function getView(){

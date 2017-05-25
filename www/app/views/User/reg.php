@@ -1,7 +1,7 @@
 <?if (!empty($data['error'])):?>
-<div class="alert alert-danger" role="alert"><?=$data['error']?></div>
+    <div class="alert alert-danger" role="alert"><?=$data['error']?></div>
 <?endif;?>
-<form class="form-inline" method="post" action="/main/login">
+<form class="form-inline" method="post" action="/user/login">
     <div class="form-group">
         <label class="sr-only" for="login">Login / Email address</label>
         <input type="text" class="form-control" name="login" id="login" placeholder="Login/email" value="<?=$data['login']?>">
