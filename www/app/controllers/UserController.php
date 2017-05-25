@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: korns
- * Date: 25.05.2017
- * Time: 8:00
- */
 
 namespace app\controllers;
 
-
 use vendor\core\App;
+use vendor\core\base\View;
 
 class UserController extends MainController {
 
@@ -22,15 +16,8 @@ class UserController extends MainController {
             'error' => '',
         ];
         if ($this->isPost()){
-
             $data = array_merge($data, $_POST);
             $data['error'] = '';
-            if (empty($data['login']) || strlen($data['login']) < 3) {
-                $data['error'] .= 'Минимальная длина логина 3 символа';
-            }
-            if (empty($data['password']) || strlen($data['password']) < 6){
-                $data['error'] .= '<br>Минимальная длина пароля 6 символа';
-            }
             if (empty($data['error'])){
                 App::$app->user->login = $data['login'];
                 App::$app->user->password = md5($data['password']);
@@ -46,10 +33,10 @@ class UserController extends MainController {
     }
 
     public function regAction() {
+        View::setMeta('Регистрация', 'Регистрация нового пользователя');
         $data = [
             'login' => '',
             'password' => '',
-            'remember' => '',
             'error' => '',
         ];
         if ($this->isPost()){

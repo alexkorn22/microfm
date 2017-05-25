@@ -17,6 +17,7 @@ class User{
         $rec->password = $this->password;
         $rec->admin = $this->admin;
         $this->id = \R::store($rec);
+        return true;
     }
 
     public function isAdmin() {
@@ -65,6 +66,10 @@ class User{
             $this->fillFromRecord($rec);
             return true;
         }
+    }
+
+    public function getPerformance() {
+        return $this->login;
     }
 
 }

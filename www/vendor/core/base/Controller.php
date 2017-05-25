@@ -37,24 +37,18 @@ class Controller{
     public $vars = [];
 
     public function __construct($route){
-
         $this->route = $route;
         $this->view = $route['action'];
         View::setMeta('Главная', 'Описание');
-
     }
 
     public function getView(){
-
         $objView = new View($this->route, $this->layout, $this->view);
         $objView->render($this->vars);
-
     }
 
     public function setVars($vars){
-
         $this->vars = $vars;
-
     }
 
     public function isAjax() {

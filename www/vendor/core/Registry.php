@@ -3,6 +3,7 @@
 namespace vendor\core;
 use vendor\core\base\Model;
 use vendor\libs\Cache;
+use vendor\core;
 
 /**
  * Class Registry
@@ -13,8 +14,20 @@ use vendor\libs\Cache;
  */
 class Registry{
 
-    use TSingleton;
+    /**
+     * @property Cache $cache
+     * @property Model $model
+     * @property User $user
+     */
+    private static $instance;
     private static $objects;
+
+    public static function getInstance(){
+        if (empty(self::$instance)) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
 
     protected function __construct(){
         $config = require ROOT . '/config/config.php';
