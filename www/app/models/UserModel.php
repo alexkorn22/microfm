@@ -33,17 +33,23 @@ class UserModel extends MainModel {
     }
 
     public function login($login, $password) {
-        $rec = \R::findOne(self::$table,'login = :login AND password = :password'
+        $errors = [];
+        $rec = \R::findOne(self::$table,'login = :login '
             ,[
               ':login' => $login,
-              ':password' => md5($password),
             ]);
-        if ($rec->isEmpty()){
-            return false;
+        if ($rec == null){
+            $errors[] = 'Логина не существует';
+        }else {
+            if (md5($password) != $rec->password) {
+                $errors[] = 'Не правильный пароль';
+            }
         }
-        $this->fillFromRecord($rec);
-        $_SESSION['user_id'] = serialize($this->id);
-        return true;
+        if (empty($errors)) {
+            $this->fillFromRecord($rec);
+            $_SESSION['user_id'] = serialize($this->id);
+        }
+        return $errors;
     }
 
     public function fillFromRecord($rec){
@@ -64,6 +70,8 @@ class UserModel extends MainModel {
             }
             $this->fillFromRecord($rec);
             return true;
+        }else {
+            return false;
         }
     }
 

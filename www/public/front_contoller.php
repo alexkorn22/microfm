@@ -10,7 +10,7 @@ define('LAYOUT', 'default');
 define('LIBS', dirname(__DIR__) . '/vendor/libs');
 define('CACHE', dirname(__DIR__) . '/tmp/cache');
 
-if (DEBUG) {
+if (DEBUG == 1) {
     error_reporting(-1);
 }
 

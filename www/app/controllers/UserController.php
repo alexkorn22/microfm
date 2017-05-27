@@ -9,34 +9,23 @@ use vendor\core\base\View;
 class UserController extends MainController {
 
     public function loginAction() {
+        $this->isAuthToMain();
         View::setMeta('Авторизация', 'Авторизация пользователя');
         $data = [
             'login' => '',
             'password' => '',
-            'remember' => '',
-            'error' => '',
         ];
-        if ($this->isPost()){
-            $data = array_merge($data, $_POST);
-            $data['error'] = '';
-            if (empty($data['error'])){
-                //App::$app->user->login = $data['login'];
-                //App::$app->user->password = md5($data['password']);
-                if (!App::$app->user->login()) {
-                    $data['error'] = 'Не удалось найти пользователя';
-                }
-            }
+        $errors = [];
+        if ($this->isPost() && isset($_POST['do_login'])){
+            $data = $_POST;
+            $errors = App::$app->user->login($data['login'], $data['password']);
         }
-        if (App::$app->user->isAuth()) {
-            header('Location: /');
-        }
-        $this->setVars(compact('data'));
+        $this->isAuthToMain();
+        $this->setVars(compact('data','errors'));
     }
 
     public function regAction() {
-        if (App::$app->user->isAuth()) {
-            header('Location: /');
-        }
+        $this->isAuthToMain();
         View::setMeta('Регистрация', 'Регистрация нового пользователя');
         $data = [
             'login' => '',
@@ -50,8 +39,9 @@ class UserController extends MainController {
             $errors = App::$app->user->verificationReg($data);
             if (empty($errors)) {
                 App::$app->user->save($data);
-                if (App::$app->user->login($data['login'],$data['password'])) {
-                    header('Location: /');
+                $errors = App::$app->user->login($data['login'],$data['password']);
+                if (empty($errors)) {
+                    $this->isAuthToMain();
                 }
             }
         }
@@ -64,6 +54,12 @@ class UserController extends MainController {
             App::$app->user = new UserModel();
         }
         header('Location: /');
+    }
+
+    public function isAuthToMain() {
+        if (App::$app->user->isAuth()) {
+            header('Location: /');
+        }
     }
 
 }
