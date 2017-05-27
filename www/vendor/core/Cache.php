@@ -1,6 +1,6 @@
 <?php
 
-namespace vendor\libs;
+namespace vendor\core;
 
 
 class Cache{

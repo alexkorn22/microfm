@@ -37,9 +37,9 @@ class Controller{
     public $vars = [];
 
     public function __construct($route){
+        session_start();
         $this->route = $route;
         $this->view = $route['action'];
-        View::setMeta('Главная', 'Описание');
     }
 
     public function getView(){

@@ -34,6 +34,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class=""><a href="/user/login/">Авторизация</a></li>
+                    <li class=""><a href="/user/reg/">Регистрация</a></li>
                     <li><a href="/pdt/index.php">Запуск фоновых</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -41,7 +42,6 @@
     </nav>
 </header>
 <div class="container">
-    <h1>Hello, world!</h1>
     <?=$content?>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

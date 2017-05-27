@@ -1,23 +1,22 @@
 <?php
 
 
-namespace vendor\core;
+namespace app\models;
 
 
 class User{
 
-    public $id = 0;
-    public $login;
-    public $password;
+    protected $id = 0;
+    protected $login;
+    protected $password;
     protected $admin = 0;
 
-    public function save(){
+    public function save($data){
         $rec = \R::dispense('users');
-        $rec->login = $this->login;
-        $rec->password = $this->password;
+        $rec->login = $data['login'];
+        $rec->password = $data['password'];
         $rec->admin = $this->admin;
         $this->id = \R::store($rec);
-        return true;
     }
 
     public function isAdmin() {
@@ -32,11 +31,11 @@ class User{
         return !empty($this->id);
     }
 
-    public function login() {
+    public function login($login, $password) {
         $rec = \R::findOne('users','login = :login AND password = :password'
             ,[
-              ':login' => $this->login,
-              ':password' => $this->password,
+              ':login' => $login,
+              ':password' => $password,
             ]);
         if ($rec->isEmpty()){
             return false;
@@ -53,7 +52,6 @@ class User{
     }
 
     public function checkAuth() {
-        session_start();
         if (isset($_SESSION['user_id'])) {
             $idUser = unserialize($_SESSION['user_id']);
             $rec = \R::findOne('users','id = :id '
@@ -70,6 +68,24 @@ class User{
 
     public function getPerformance() {
         return $this->login;
+    }
+
+    public function verificationReg($data){
+        $errors = [];
+        if (trim($data['login']) == ''){
+            $errors[] = 'Не заполнен логин';
+        }
+        if (trim($data['email']) == ''){
+            $errors[] = 'Не заполнен email';
+        }
+        if ($data['password'] == ''){
+            $errors[] = 'Не заполнен пароль';
+        } else {
+            if ($data['password'] != $data['password_confirm']){
+                $errors[] = 'Подтверждение пароля не сопадает';
+            }
+        }
+        return $errors;
     }
 
 }

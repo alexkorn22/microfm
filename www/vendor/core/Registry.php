@@ -1,9 +1,9 @@
 <?php
 
 namespace vendor\core;
+use app\models\User;
 use vendor\core\base\Model;
 use vendor\libs\Cache;
-use vendor\core;
 
 /**
  * Class Registry

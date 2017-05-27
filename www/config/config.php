@@ -1,9 +1,9 @@
 <?php
 $config = [
     'components' => [
-      'cache' => 'vendor\libs\Cache',
+      'cache' => 'vendor\core\Cache',
       'model' => 'vendor\core\base\Model',
-      'user' => 'vendor\core\User',
+      'user' => '\app\models\User',
     ],
 ];
 return $config;
