@@ -6,7 +6,7 @@ use vendor\core\Db;
 
 class Model{
     protected $connectDb;
-    protected $table;
+    protected static $table;
 
     public function __construct(){
 

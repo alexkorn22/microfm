@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\User;
 use vendor\core\App;
 use vendor\core\base\View;
 
@@ -49,9 +50,20 @@ class UserController extends MainController {
             $errors = App::$app->user->verificationReg($data);
             if (empty($errors)) {
                 App::$app->user->save($data);
+                if (App::$app->user->login($data['login'],$data['password'])) {
+                    header('Location: /');
+                }
             }
         }
         $this->setVars(compact('data','errors'));
+    }
+
+    public function logoutAction() {
+        if (App::$app->user->isAuth()) {
+            App::$app->user->logout();
+            App::$app->user = new User();
+        }
+        header('Location: /');
     }
 
 }

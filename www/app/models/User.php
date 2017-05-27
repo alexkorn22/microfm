@@ -4,17 +4,18 @@
 namespace app\models;
 
 
-class User{
+class User extends Main {
 
     protected $id = 0;
     protected $login;
-    protected $password;
     protected $admin = 0;
+    protected static $table = 'users';
 
     public function save($data){
         $rec = \R::dispense('users');
         $rec->login = $data['login'];
-        $rec->password = $data['password'];
+        $rec->email = $data['email'];
+        $rec->password = md5($data['password']);
         $rec->admin = $this->admin;
         $this->id = \R::store($rec);
     }
@@ -32,10 +33,10 @@ class User{
     }
 
     public function login($login, $password) {
-        $rec = \R::findOne('users','login = :login AND password = :password'
+        $rec = \R::findOne(self::$table,'login = :login AND password = :password'
             ,[
               ':login' => $login,
-              ':password' => $password,
+              ':password' => md5($password),
             ]);
         if ($rec->isEmpty()){
             return false;
@@ -85,7 +86,22 @@ class User{
                 $errors[] = 'Подтверждение пароля не сопадает';
             }
         }
+        if (empty($errors)) {
+            $rec = \R::findOne(self::$table,'login = ?',[$data['login']]);
+            if ($rec){
+                $errors[] = 'Пользователь с таким логином существует';
+            } else {
+                $rec = \R::findOne(self::$table,'email = ?',[$data['email']]);
+                if ($rec){
+                    $errors[] = 'Пользователь с таким email существует';
+                }
+            }
+        }
         return $errors;
+    }
+
+    public function logout() {
+        unset($_SESSION['user_id']);
     }
 
 }
