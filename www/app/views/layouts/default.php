@@ -1,3 +1,6 @@
+<?
+$user = \vendor\core\App::$app->user;
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -33,12 +36,21 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class=""><a href="/user/login/">Авторизация</a></li>
-                    <li class=""><a href="/user/reg/">Регистрация</a></li>
+                    <?if ($user->isAuth()):?>
                     <li><a href="/pdt/index.php">Запуск фоновых</a></li>
+                    <?endif;?>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <?if ($user->isAuth()):?>
+                        <li><p><?=$user->getPerformance()?></p></li>
+                        <li><a href="/user/logout/">Выйти</a></li>
+                    <?else:?>
+                        <li><a href="/user/login/">Войти</a></li>
+                    <?endif;?>
+
                 </ul>
             </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+        </div>
     </nav>
 </header>
 <div class="container">
