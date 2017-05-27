@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\User;
+use app\models\UserModel;
 use vendor\core\App;
 use vendor\core\base\View;
 
@@ -61,7 +61,7 @@ class UserController extends MainController {
     public function logoutAction() {
         if (App::$app->user->isAuth()) {
             App::$app->user->logout();
-            App::$app->user = new User();
+            App::$app->user = new UserModel();
         }
         header('Location: /');
     }

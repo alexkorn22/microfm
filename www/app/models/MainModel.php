@@ -4,7 +4,7 @@ namespace app\models;
 
 use vendor\core\base\Model;
 
-class Main extends AppModel {
+class MainModel extends AppModel {
 
     //public $table = 'posts';
 

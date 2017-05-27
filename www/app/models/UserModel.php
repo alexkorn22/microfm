@@ -4,7 +4,7 @@
 namespace app\models;
 
 
-class User extends Main {
+class UserModel extends MainModel {
 
     protected $id = 0;
     protected $login;

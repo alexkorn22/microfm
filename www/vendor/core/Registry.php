@@ -1,7 +1,7 @@
 <?php
 
 namespace vendor\core;
-use app\models\User;
+use app\models\UserModel;
 use vendor\core\base\Model;
 use vendor\libs\Cache;
 
@@ -10,14 +10,14 @@ use vendor\libs\Cache;
  * @package vendor\core
  * @property Cache $cache
  * @property Model $model
- * @property User $user
+ * @property UserModel $user
  */
 class Registry{
 
     /**
      * @property Cache $cache
      * @property Model $model
-     * @property User $user
+     * @property UserModel $user
      */
     private static $instance;
     private static $objects;

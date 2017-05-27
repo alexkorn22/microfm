@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\Main;
+use app\models\MainModel;
 use vendor\core\App;
 use vendor\core\base\View;
 use vendor\core\Registry;
@@ -17,7 +17,6 @@ class MainController extends AppController{
             $posts = \R::findAll('posts');
             App::$app->cache->set('posts', $posts);
         }
-        App::$app->user->isAdmin();
         $this->setVars(compact('posts'));
     }
 
@@ -30,9 +29,7 @@ class MainController extends AppController{
     }
 
     public function testAction() {
-        if (!App::$app->user->isAdmin()){
-           header('Location: /');
-        }
+
     }
 
 }
