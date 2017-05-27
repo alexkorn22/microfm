@@ -67,4 +67,8 @@ class Controller{
         require APP . '/views/' . $this->route['controller'] . '/' . $view . '.php';
     }
 
+    public function goToIndex() {
+        header('Location: /');
+    }
+
 }
