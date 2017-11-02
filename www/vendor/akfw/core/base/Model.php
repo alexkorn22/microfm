@@ -1,8 +1,8 @@
 <?php
 
-namespace vendor\core\base;
+namespace akfw\core\base;
 
-use vendor\core\Db;
+use akfw\core\Db;
 
 class Model{
     protected $connectDb;

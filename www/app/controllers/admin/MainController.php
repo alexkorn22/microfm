@@ -4,7 +4,7 @@
 namespace app\controllers\admin;
 
 
-use vendor\core\base\View;
+use akfw\core\base\View;
 
 class MainController extends AppController {
 

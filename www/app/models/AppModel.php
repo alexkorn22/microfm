@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use vendor\core\base\Model;
+use akfw\core\base\Model;
 
 class AppModel extends Model {
 

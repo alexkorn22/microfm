@@ -1,5 +1,7 @@
 <?php
-use vendor\core\Router;
+
+use akfw\core\Router;
+
 require 'front_contoller.php';
 
 //routers

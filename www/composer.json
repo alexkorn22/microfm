@@ -1,0 +1,10 @@
+{
+    "name": "ak/fw",
+    "require": {},
+    "autoload": {
+        "psr-4" : {
+            "akfw\\" : "vendor/akfw",
+            "app\\" : "app"
+        }
+    }
+}

@@ -6,9 +6,9 @@
  * Time: 21:56
  */
 
-namespace vendor\core\base;
+namespace akfw\core\base;
 
-use vendor\core\App;
+use akfw\core\App;
 
 class Controller{
 

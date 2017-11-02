@@ -1,8 +1,8 @@
 <?php
 
-namespace vendor\core;
+namespace akfw\core;
 
-use vendor\libs\Cache;
+use akfw\libs\Cache;
 
 /**
  * Class App

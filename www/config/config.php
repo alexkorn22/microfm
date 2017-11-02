@@ -1,8 +1,8 @@
 <?php
 $config = [
     'components' => [
-      'cache' => 'vendor\libs\Cache',
-      'model' => 'vendor\core\base\Model',
+      'cache' => 'akfw\libs\Cache',
+      'model' => 'akfw\core\base\Model',
     ],
 ];
 return $config;

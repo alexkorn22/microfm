@@ -2,8 +2,8 @@
 
 namespace app\controllers;
 
-use vendor\core\base\Controller;
-use vendor\core\base\Model;
+use akfw\core\base\Controller;
+
 
 class AppController extends Controller {
 

@@ -2,8 +2,8 @@
 
 namespace app\controllers\admin;
 
-use vendor\core\base\Controller;
-use vendor\core\base\View;
+use akfw\core\base\Controller;
+use akfw\core\base\View;
 
 class AppController extends Controller {
     public $layout = 'admin';

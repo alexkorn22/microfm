@@ -3,9 +3,9 @@
 namespace app\controllers;
 
 use app\models\Main;
-use vendor\core\App;
-use vendor\core\base\View;
-use vendor\core\Registry;
+use akfw\core\App;
+use akfw\core\base\View;
+use akfw\core\Registry;
 
 class MainController extends AppController{
 

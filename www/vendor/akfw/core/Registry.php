@@ -1,7 +1,8 @@
 <?php
 
-namespace vendor\core;
-use vendor\libs\Cache;
+namespace akfw\core;
+
+use akfw\libs\Cache;
 
 /**
  * Class Registry
