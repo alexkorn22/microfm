@@ -1,10 +1,12 @@
 <?php
 
 namespace vendor\core;
+use vendor\libs\Cache;
 
 /**
  * Class Registry
  * @package vendor\core
+ * @property Cache $cache
  */
 class Registry{
 
