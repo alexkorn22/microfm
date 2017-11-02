@@ -62,7 +62,7 @@ class Controller{
 
     public function loadView($view, $vars = []) {
         extract($vars);
-        require APP . '/views/' . $this->route['controller'] . '/' . $view . '.php';
+        require APP . '/views/' . $this->route['prefix'] . $this->route['controller'] . '/' . $view . '.php';
     }
 
 }

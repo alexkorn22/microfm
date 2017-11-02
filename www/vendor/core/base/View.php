@@ -48,7 +48,7 @@ class View {
             extract($vars);
         }
 
-        $fileView =  APP . "/views/{$this->route['controller']}/{$this->view}.php";
+        $fileView =  APP . "/views/{$this->route['prefix']}{$this->route['controller']}/{$this->view}.php";
         ob_start();
         if (is_file($fileView)){
             require $fileView;

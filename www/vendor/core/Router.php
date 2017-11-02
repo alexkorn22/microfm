@@ -58,6 +58,11 @@ class Router{
                 }
                 $route['controller'] = self::upperCamelCase($route['controller']);
                 $route['action'] = self::lowerCamelCase($route['action']);
+                if (!isset($route['prefix'])) {
+                    $route['prefix'] = '';
+                } else {
+                    $route['prefix'] .= '\\';
+                }
                 self::$route = $route;
                 return true;
             }
@@ -92,7 +97,7 @@ class Router{
     public static function dispatch($url){
         $url = self::removeQueryString($url);
         if (Router::matchRoute($url)){
-            $controller = 'app\controllers\\' . self::$route['controller'] . 'Controller';
+            $controller = 'app\controllers\\' .self::$route['prefix'] . self::$route['controller'] . 'Controller';
             if (class_exists($controller)) {
                 $objController = new $controller(self::$route);
                 $method = self::$route['action'] . 'Action';
