@@ -1,3 +1,5 @@
 /.idea
+/node_modules
 /www/tmp
-/www/public/pdt/data
+/www/public/css/dist
+/www/public/js/dist
