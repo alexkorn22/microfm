@@ -1,6 +1,8 @@
 {
     "name": "ak/fw",
-    "require": {},
+    "require": {
+        "vlucas/valitron": "^1.4"
+    },
     "autoload": {
         "psr-4" : {
             "akfw\\" : "vendor/akfw",

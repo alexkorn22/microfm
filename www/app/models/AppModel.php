@@ -2,10 +2,9 @@
 
 namespace app\models;
 
-use akfw\core\base\Model;
+use akfw\core\base\ModelRecord;
 
-class AppModel extends Model {
-
+class AppModel extends ModelRecord  {
     public $table = 'posts';
 
 }

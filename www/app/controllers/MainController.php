@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use app\models\Main;
 use akfw\core\App;
 use akfw\core\base\View;
 use akfw\core\Registry;

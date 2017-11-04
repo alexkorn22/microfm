@@ -16,8 +16,26 @@
     <![endif]-->
 </head>
 <body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">AK фреймворк</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="/">Главная <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="/user/signup">Регистрация</a>
+                    <a class="nav-item nav-link" href="/user/login">Войти</a>
+                    <a class="nav-item nav-link" href="/user/logout">Выйти</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+</header>
 <div class="container">
-    <h1>Hello, world!</h1>
     <?=$content?>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
