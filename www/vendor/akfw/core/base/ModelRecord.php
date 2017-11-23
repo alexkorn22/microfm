@@ -2,7 +2,6 @@
 
 namespace akfw\core\base;
 
-use akfw\core\Db;
 use RedBeanPHP\OODBBean;
 use Valitron\Validator;
 
@@ -15,6 +14,7 @@ abstract class ModelRecord{
     protected $bean;
     public $attributes = [];
     public $rules = [];
+    public $labels = [];
     public $errors = [];
     public $id = 0;
 
@@ -27,11 +27,15 @@ abstract class ModelRecord{
         }
     }
     public function load($data){
+        if (!is_array($data)){
+            return false;
+        }
         foreach ($this->attributes as $key => $value) {
             if (isset($data[$key])) {
                 $this->attributes[$key] = $data[$key];
             }
         }
+        return true;
     }
     public function save(){
         $this->bean->import($this->attributes);
@@ -133,8 +137,10 @@ abstract class ModelRecord{
 
     public function validate() {
         $this->errors = [];
+        Validator::lang('ru');
         $v = new Validator($this->attributes);
         $v->rules($this->rules);
+        $v->labels($this->labels);
         if(!$v->validate()) {
             $this->errors = $v->errors();
             return false;
@@ -145,7 +151,9 @@ abstract class ModelRecord{
     public function getErrors() {
         $res = '<ul>';
         foreach ($this->errors as $error) {
-            $res .= "<li>$error</li>";
+            foreach ($error as $item) {
+                $res .= "<li>$item</li>";
+            }
         }
         $res .= '</ul>';
         return $res;

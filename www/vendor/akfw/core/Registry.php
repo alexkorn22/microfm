@@ -8,6 +8,7 @@ use akfw\libs\Cache;
  * Class Registry
  * @package vendor\core
  * @property Cache $cache
+ * @property Session $session
  */
 class Registry{
 
@@ -19,6 +20,7 @@ class Registry{
         foreach ($config['components'] as $name => $component) {
             self::$objects[$name] = new $component;
         }
+        self::$objects['session'] = Session::getInstance();
     }
 
     public function __set($name, $value){
@@ -30,6 +32,7 @@ class Registry{
         if (is_object(self::$objects[$name])) {
             return self::$objects[$name];
         }
+        return null;
     }
 
 }

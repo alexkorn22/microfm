@@ -8,7 +8,7 @@
 
 namespace akfw\core\base;
 
-use akfw\core\App;
+use akfw\core\Request;
 
 class Controller{
 
@@ -18,6 +18,10 @@ class Controller{
      */
     public $route = [];
 
+    /**
+     * @var Request
+     */
+    public $request;
     /**
      * имя файла вида(по умолчанию название экшена)
      * @var string
@@ -40,6 +44,7 @@ class Controller{
 
         $this->route = $route;
         $this->view = $route['action'];
+        $this->request = new Request();
 
     }
 
@@ -54,10 +59,6 @@ class Controller{
 
         $this->vars = $vars;
 
-    }
-
-    public function isAjax() {
-        return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
     }
 
     public function loadView($view, $vars = []) {
