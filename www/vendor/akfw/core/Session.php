@@ -9,8 +9,9 @@ class Session {
 
     protected static $instance;
 
-    private $session_start = FALSE;
+    public $session_start = FALSE;
     private function __construct(){
+        $this->start();
     }
 
     public static function getInstance(){

@@ -26,6 +26,10 @@ class Request {
         return strtoupper($_SERVER['REQUEST_METHOD']) == 'POST';
     }
 
+    public function isGet() {
+        return strtoupper($_SERVER['REQUEST_METHOD']) == 'GET';
+    }
+
     public function post($key, $default = null) {
         if (isset($this->post[$key])) {
             return $this->post[$key];

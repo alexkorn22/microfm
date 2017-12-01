@@ -22,21 +22,26 @@ class UserController extends AppController {
     }
 
     public function signupAction(){
+        $response = new Response();
+        if (User::getCurrentUser()) {
+            $response->redirect('/');
+        }
         $user = new User();
         $user->load(App::$app->session->get('signupDataUser'));
         $errors = App::$app->session->getFlash('errors');
         if ($this->request->isPost()) {
-            $post = $this->request->getPost();
-            unset($post['password']);
-            App::$app->session->set('signupDataUser',$this->request->getPost());
+            $this->setSignupDataUser();
             $response = new Response();
             $user->load($this->request->getPost());
+            $user->doHashPassword();
             if (!$user->validate()) {
                 App::$app->session->setFlash('errors', $user->getErrors());
                 $response->redirect('/user/signup');
             } else {
-                App::$app->session->delete('signupDataUser');
-                App::$app->session->set('curUserId',$user->id);
+                $this->unsetSignupDataUser();
+                if ($user->save()) {
+                    $user->setCurrentUser();
+                }
                 $response->redirect('/');
                 die();
             }
@@ -44,12 +49,25 @@ class UserController extends AppController {
         $this->setVars(compact('user','errors'));
     }
 
+    protected function setSignupDataUser() {
+        $post = $this->request->getPost();
+        unset($post['password']);
+        App::$app->session->set('signupDataUser',$post);
+    }
+
+    protected function unsetSignupDataUser() {
+        App::$app->session->delete('signupDataUser');
+    }
+
     public function loginAction() {
 
     }
 
     public function logoutAction() {
-
+        User::unsetCurrentUser();
+        $response = new Response();
+        $response->redirect('/user/signup');
+        die();
     }
 
 }

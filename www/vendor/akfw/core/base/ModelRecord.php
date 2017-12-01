@@ -26,6 +26,7 @@ abstract class ModelRecord{
             $this->bean = \R::dispense(static::$tableName);
         }
     }
+
     public function load($data){
         if (!is_array($data)){
             return false;
@@ -37,6 +38,7 @@ abstract class ModelRecord{
         }
         return true;
     }
+
     public function save(){
         $this->bean->import($this->attributes);
         if ($this->id) {
@@ -49,6 +51,7 @@ abstract class ModelRecord{
         $this->id = $res;
         return true;
     }
+
     /**
      * @param $sql
      * @param $params
@@ -68,17 +71,20 @@ abstract class ModelRecord{
         }
         return $result;
     }
+
     public function __get($name){
         if (isset($this->attributes[$name])) {
             return    $this->attributes[$name];
         }
         return null;
     }
+
     public function __set($name, $value){
         if (isset($this->attributes[$name])) {
             $this->attributes[$name] = $value;
         }
     }
+
     public static function totalCount($params = []){
         if (count($params) > 0) {
             $sql = 'WHERE ';
@@ -93,6 +99,7 @@ abstract class ModelRecord{
         }
         return \R::count(static::$tableName);
     }
+
     public static function delete($id) {
         $bean = \R::findOne(static::$tableName,'id = ?',[$id]);
         \R::trash($bean);
@@ -111,7 +118,7 @@ abstract class ModelRecord{
         return $item;
     }
 
-    public static function findOne($params) {
+    public static function findOne($params = []) {
         $sql = '';
         $paramsTotal = [];
         if (count($params) > 0) {
@@ -123,7 +130,8 @@ abstract class ModelRecord{
             }
             $sql .= implode(' AND ',$paramsSql);
         }
-        $bean  = \R::findOne(static::$tableName, $sql, $paramsTotal);
+        $query = static::makeQueryData($params);
+        $bean  = \R::findOne(static::$tableName, $query['sql'], $query['params']);
         $item = new static();
         if ($bean) {
             foreach ($item->attributes as $key => $value) {
@@ -133,6 +141,28 @@ abstract class ModelRecord{
             $item->bean = $bean;
         }
         return $item;
+    }
+
+    protected static function makeQueryData($params) {
+        $result = [
+            'sql' => '',
+            'params' => [],
+        ];
+        $paramsTotal = [];
+        if (count($params) > 0) {
+            $result['sql'] = 'WHERE ';
+            $paramsSql = [];
+            foreach ($params as $key => $value) {
+                $result['params'][':' . $key] = $value;
+                $paramsSql[] = ':' . $key . '=' . $key;
+            }
+            $result['sql'] .= implode(' AND ',$paramsSql);
+        }
+        return $result;
+    }
+
+    public function isEmpty(){
+        return $this->bean->isEmpty();
     }
 
     public function validate() {

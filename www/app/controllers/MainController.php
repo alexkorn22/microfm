@@ -19,7 +19,7 @@ class MainController extends AppController{
     }
 
     public function testAjaxAction() {
-        if ($this->isAjax()) {
+        if ($this->request->isAjax()) {
             $post = \R::findOne('posts',"id = {$_POST['id']}");
             $this->loadView('testAjax', compact('post'));
             die();

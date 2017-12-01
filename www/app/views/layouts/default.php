@@ -26,9 +26,14 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" href="/">Главная <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="/user/signup">Регистрация</a>
-                    <a class="nav-item nav-link" href="/user/login">Войти</a>
-                    <a class="nav-item nav-link" href="/user/logout">Выйти</a>
+                    <? if (!\app\models\User::getCurrentUser()):?>
+                        <a class="nav-item nav-link" href="/user/signup">Регистрация</a>
+                        <a class="nav-item nav-link" href="/user/login">Войти</a>
+                    <? endif;?>
+                    <? if (\app\models\User::getCurrentUser()):?>
+                        <a class="nav-item nav-link" href="/user/logout">Выйти</a>
+                    <? endif;?>
+
                 </div>
             </div>
         </div>
