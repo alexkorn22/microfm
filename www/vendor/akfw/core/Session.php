@@ -29,9 +29,9 @@ class Session {
         return true;
     }
 
-    public function get($key){
+    public function get($key,$default = false){
         $this->start();
-        return (!empty($_SESSION[$key])) ? $_SESSION[$key] : false;
+        return (!empty($_SESSION[$key])) ? $_SESSION[$key] : $default;
     }
 
     public function set($key, $value){
@@ -53,8 +53,8 @@ class Session {
         $this->set($key, $value);
     }
 
-    public function getFlash($key) {
-        $result = $this->get($key);
+    public function getFlash($key,$default = false) {
+        $result = $this->get($key,$default);
         if ($this->has($key)) {
             $this->delete($key);
         }

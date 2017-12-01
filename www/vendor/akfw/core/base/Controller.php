@@ -9,6 +9,7 @@
 namespace akfw\core\base;
 
 use akfw\core\Request;
+use akfw\core\Response;
 
 class Controller{
 
@@ -22,6 +23,10 @@ class Controller{
      * @var Request
      */
     public $request;
+    /**
+     * @var Response
+     */
+    public $response;
     /**
      * имя файла вида(по умолчанию название экшена)
      * @var string
@@ -45,6 +50,8 @@ class Controller{
         $this->route = $route;
         $this->view = $route['action'];
         $this->request = new Request();
+        $this->response = new Response();
+
 
     }
 

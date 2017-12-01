@@ -22,28 +22,25 @@ class UserController extends AppController {
     }
 
     public function signupAction(){
-        $response = new Response();
         if (User::getCurrentUser()) {
-            $response->redirect('/');
+            $this->response->redirect('/');
         }
         $user = new User();
         $user->load(App::$app->session->get('signupDataUser'));
         $errors = App::$app->session->getFlash('errors');
         if ($this->request->isPost()) {
             $this->setSignupDataUser();
-            $response = new Response();
             $user->load($this->request->getPost());
             $user->doHashPassword();
             if (!$user->validate()) {
                 App::$app->session->setFlash('errors', $user->getErrors());
-                $response->redirect('/user/signup');
+                $this->response->redirect('/user/signup');
             } else {
                 $this->unsetSignupDataUser();
                 if ($user->save()) {
                     $user->setCurrentUser();
                 }
-                $response->redirect('/');
-                die();
+                $this->response->redirect('/');
             }
         }
         $this->setVars(compact('user','errors'));
@@ -60,14 +57,31 @@ class UserController extends AppController {
     }
 
     public function loginAction() {
-
+        if (User::getCurrentUser()) {
+            $this->response->redirect('/');
+        }
+        $errors = App::$app->session->getFlash('errors');
+        $login = App::$app->session->getFlash('login');
+        if ($this->request->isPost()) {
+            $login = $this->request->post('login');
+            $user = new User();
+            $user->load($this->request->getPost());
+            $user = $user->validateLogin();
+            if ($user) {
+                $user->setCurrentUser();
+                $this->response->redirect('/');
+            }
+            $errors = $user->getErrors();
+            App::$app->session->setFlash('login',$login);
+            App::$app->session->setFlash('errors',$errors);
+            $this->response->redirect('/user/login');
+        }
+        $this->setVars(compact('login','errors'));
     }
 
     public function logoutAction() {
         User::unsetCurrentUser();
-        $response = new Response();
-        $response->redirect('/user/signup');
-        die();
+        $this->response->redirect('/user/signup');
     }
 
 }

@@ -103,11 +103,30 @@ class User extends ModelRecord {
         }
     }
 
-
+    public function isAdmin() {
+        return $this->role == 'admin';
+    }
 
     public static function unsetCurrentUser(){
         self::$curUser = null;
         App::$app->session->delete('userId');
+    }
+
+    public function validateLogin() {
+        $find = self::getByLogin($this->login);
+        if (!$find->isEmpty()) {
+            if (password_verify($this->password,$find->password)) {
+                return $find;
+            }
+        }
+        $find = self::getByEmail($this->login);
+        if (!$find->isEmpty()) {
+            if (password_verify($this->password,$find->password)) {
+                return $find;
+            }
+        }
+        $this->errors[][] = 'Неверные данные для входа';
+        return false;
     }
 
 }
