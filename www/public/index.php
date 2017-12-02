@@ -4,10 +4,6 @@ use akfw\core\Router;
 
 require 'front_contoller.php';
 
-//echo $test;
-throw new Exception('Exception test',404);
-
-die();
 //routers
 Router::add('^page/?(?P<alias>[a-z-]+)?$',['controller'=>'Page','action'=>'view']);
 
