@@ -1,6 +1,7 @@
 <?php
 use akfw\core\Router;
 
+define('DEBUG',1);
 define('WWW', __DIR__);
 define('CORE', dirname(__DIR__) . '/vendor/akfw/core');
 define('ROOT', dirname(__DIR__));
@@ -8,8 +9,6 @@ define('APP', dirname(__DIR__) . '/app');
 define('LAYOUT', 'default');
 define('LIBS', dirname(__DIR__) . '/vendor/akfw/libs');
 define('CACHE', dirname(__DIR__) . '/tmp/cache');
-
-error_reporting(-1);
 
 require LIBS .'/functions.php';
 

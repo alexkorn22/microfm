@@ -18,6 +18,7 @@ class App{
     public function __construct(){
         self::$app = Registry::getInstance();
         Db::getInstance();
+        new ErrorHandler();
     }
 
 }
