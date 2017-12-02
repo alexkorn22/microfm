@@ -42,13 +42,16 @@ class ErrorHandler {
             'prefix' => '',
             'controller' => 'Errors'
         ];
-        $view = $this->getNameView();
+        $view = $this->getNameView($response);
         $objView = new View($route, LAYOUT, $view);
         $objView->render(compact('errno','errstr','errfile','errline'));
     }
 
-    protected function getNameView() {
+    protected function getNameView($response) {
         $view = 'prod';
+        if ($response == 404) {
+            $view = '404';
+        }
         if (DEBUG) {
             $view = 'dev';
         }

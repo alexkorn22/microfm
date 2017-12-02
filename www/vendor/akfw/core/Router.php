@@ -105,14 +105,13 @@ class Router{
                     $objController->$method();
                     $objController->getView();
                 } else {
-                    echo "Метод $controller::$method не найден";
+                    throw new \Exception("Метод $controller::$method не найден",404);
                 }
             } else {
-                echo "Контролер $controller не найден";
+                throw new \Exception("Контролер $controller не найден",404);
             }
         }else {
-            http_response_code(404);
-            include_once '404.html';
+            throw new \Exception('Страница не найдена',404);
         }
     }
 

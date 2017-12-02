@@ -53,7 +53,7 @@ class View {
         if (is_file($fileView)){
             require $fileView;
         } else {
-            echo "<p>Не найден вид <b>$fileView</b></p>";
+            throw new \Exception("<p>Не найден вид <b>$fileView</b></p>",500);
         }
         /** @noinspection PhpUnusedLocalVariableInspection */
         $content = ob_get_clean();
