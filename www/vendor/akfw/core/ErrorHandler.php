@@ -16,8 +16,11 @@ class ErrorHandler {
     }
 
     public function errorHandler($errno, $errstr, $errfile, $errline){
-        $this->displayError($errno, $errstr, $errfile, $errline);
         $this->logger($errno, $errstr, $errfile, $errline);
+        if (DEBUG) {
+            $this->displayError($errno, $errstr, $errfile, $errline);
+        }
+        return true;
     }
 
     public function fatalErrorHandler(){
